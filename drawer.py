@@ -178,6 +178,9 @@ for i in range(0,iterations):
         # make new comp, and transfer diff value
         compImg = drawImg.copy()
         accept += 1
+        if saveframes == True and accept % 100 == 0:
+            saveFrame(framecount)
+            framecount += 1
 
     # if new image is worse
     elif ( drawImgDiff > compImgDiff ):
@@ -190,11 +193,7 @@ for i in range(0,iterations):
         identical += 1
 
     # make new file every tenth iteration
-    if (accept % 100 == 0 or debug == True):
-        if saveframes == True:
-            saveFrame(framecount)
-            framecount += 1
-        else:
+    if (accept % 100 == 0 and saveframes != True) or debug == True:
             drawImg.save(outputfile)
 
 #save when finished
